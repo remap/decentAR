@@ -1,4 +1,5 @@
-import Uploader from "./Uploader";
+import Uploader from "./components/Uploader";
+import './css/App.css';
 
 function App() {
   return (
