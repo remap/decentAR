@@ -9,7 +9,8 @@ const Uploader = () => {
     const uploadFile = (file) => {
         axios.get("https://cmnyi7vpgg.execute-api.us-west-1.amazonaws.com/default/getPresignedURL")
         .then(response => {
-            axios.put(response.data.uploadURL, {"body":file}, {headers: {'Content-Type': 'image/jpeg'}})
+            console.log(file.type);
+            axios.put(response.data.uploadURL, {"body":file}, {headers: {'Content-Type': 'model/gltf'}})
         })
     }
 
