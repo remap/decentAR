@@ -7,10 +7,10 @@ const Uploader = () => {
     const [subtitle, setSubtitle] = useState("upload a GLTF file!!")
     const handleFileInput = (e) => setSelectedFile(e.target.files[0]);
     const uploadFile = (file) => {
-        axios.get("https://cmnyi7vpgg.execute-api.us-west-1.amazonaws.com/default/getPresignedURL")
+        axios.get("https://bxyhhrw8zg.execute-api.us-west-1.amazonaws.com/default/getPresignedURLUpload")
         .then(response => {
             console.log(file.type);
-            axios.put(response.data.uploadURL, {"body":file}, {headers: {'Content-Type': 'model/gltf'}})
+            axios.put(response.data.uploadURL, {"body":file}, {headers: {'Content-Type': 'model/glb'}})
         })
     }
 
