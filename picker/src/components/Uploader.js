@@ -23,7 +23,7 @@ const Uploader = () => {
   const uploadFile = (file) => {
     axios.get("https://bxyhhrw8zg.execute-api.us-west-1.amazonaws.com/default/getPresignedURLUpload")
     .then(response => {
-      axios.put(response.data.uploadURL, file, {headers: {'Content-Type': 'model/gltf-binary', 'Access-Control-Allow-Origin': '*',}})
+      axios.put(response.data.uploadURL, file, {headers: {'Content-Type': 'model/gltf-binary', 'Access-Control-Allow-Origin': '*'}})
     })
 }
     // const uploadFile = (file) => {
