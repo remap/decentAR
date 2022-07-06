@@ -1,6 +1,6 @@
 import Uploader from "./components/Uploader";
 import Viewer from "./components/Viewer";
-import './css/App.css';
+// import './css/App.css';
 
 function App() {
   return (

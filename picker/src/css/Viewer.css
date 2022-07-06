@@ -1,0 +1,9 @@
+.viewer-container {
+    display: flex;
+    flex-direction: row;
+}
+
+.viewer {
+   width: 50%;
+   height: 50%;
+}
