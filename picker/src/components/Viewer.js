@@ -5,6 +5,8 @@ import Card from 'react-bootstrap/Card';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import ListGroup from 'react-bootstrap/ListGroup';
+import Col from 'react-bootstrap/Col';
+import Row from 'react-bootstrap/Row';
 import '../css/Viewer.css';
 
 const Viewer = () => {
@@ -38,26 +40,46 @@ const Viewer = () => {
             </ListGroup>
         </Card>
         <div>{JSON.stringify(sceneJSON)}</div>
-        
-        <Card style={{ width: '200rem'}}>
-            <Card.Header>Editor</Card.Header>
-            {selectedItemKey && <ListGroup variant="flush">
-                <ListGroup.Item>
-                    URL: {sceneJSON[selectedItemKey].url}
-                </ListGroup.Item>
-                <ListGroup.Item>
-                    POSITION: {sceneJSON[selectedItemKey].position.x},
-                    {sceneJSON[selectedItemKey].position.y},
-                    {sceneJSON[selectedItemKey].position.z}
-                </ListGroup.Item>
-                <ListGroup.Item>
-                    ROTATION: {sceneJSON[selectedItemKey].rotation.pitch},
-                    {sceneJSON[selectedItemKey].rotation.yaw},
-                    {sceneJSON[selectedItemKey].rotation.roll}
-                </ListGroup.Item>
-            </ListGroup>}
-            <Button>Save</Button>
-        </Card>
+        {selectedItemKey && <Form style={{ width: '300rem'}}>
+            <Form.Group>
+                <Form.Label>URL</Form.Label>
+                <Form.Control type="text" placeholder={sceneJSON[selectedItemKey].url}/>
+            </Form.Group>
+
+            <Row>
+                <Form.Group as={Col}>
+                    <Form.Label>x</Form.Label>
+                    <Form.Control type="text" placeholder={sceneJSON[selectedItemKey].position.x}/>
+                </Form.Group>
+                <Form.Group as={Col}>
+                    <Form.Label>y</Form.Label>
+                    <Form.Control type="text" placeholder={sceneJSON[selectedItemKey].position.y}/>
+                </Form.Group>
+                <Form.Group as={Col}>
+                    <Form.Label>z</Form.Label>
+                    <Form.Control type="text" placeholder={sceneJSON[selectedItemKey].position.z}/>
+                </Form.Group>
+            </Row>
+            
+            <Row>
+                <Form.Group as={Col}>
+                    <Form.Label>Pitch</Form.Label>
+                    <Form.Control type="text" placeholder={sceneJSON[selectedItemKey].rotation.pitch}/>
+                </Form.Group>
+                <Form.Group as={Col}>
+                    <Form.Label>Yaw</Form.Label>
+                    <Form.Control type="text" placeholder={sceneJSON[selectedItemKey].rotation.yaw}/>
+                </Form.Group>
+                <Form.Group as={Col}>
+                    <Form.Label>Roll</Form.Label>
+                    <Form.Control type="text" placeholder={sceneJSON[selectedItemKey].rotation.roll}/>
+                </Form.Group>
+            </Row>   
+                
+            <Button variant="primary" type="submit">
+                Submit
+            </Button>
+        </Form>}
       </div>
     );
 }
