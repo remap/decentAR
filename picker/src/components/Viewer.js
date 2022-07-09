@@ -13,6 +13,7 @@ const Viewer = () => {
     const [sceneJSON, setSceneJSON] = useState({});
     const [tentativeItemValue, setTentativeItemValue] = useState(null);
     const [selectedItemKey, setSelectedItemKey] = useState(null);
+    const [isSceneSubmitted, setIsSceneSubmitted] = useState(false);
 
     useEffect(() => {
         async function fetchData() {
@@ -35,8 +36,19 @@ const Viewer = () => {
         let newSceneJSON = {...sceneJSON};
         newSceneJSON[selectedItemKey] = tentativeItemValue;
         setSceneJSON(newSceneJSON);
+        setIsSceneSubmitted(true);
         event.preventDefault();
     }
+
+    useEffect(() => {
+        console.log(sceneJSON);
+        if (isSceneSubmitted) {
+            console.log("triggering push!");
+            console.log(`sceneJSON: ${JSON.stringify(sceneJSON)}`);
+            axios.put("https://decentar-bucket.s3.us-west-1.amazonaws.com/decentar_scenes_scene.json", sceneJSON, {headers: {'Content-Type': 'application/json', 'Access-Control-Allow-Origin': '*'}});
+            setIsSceneSubmitted(false);
+        }
+    }, [sceneJSON, isSceneSubmitted])
 
     const onChangeURL = (e) => {
         setTentativeItemValue({...tentativeItemValue, url: e.target.value});
