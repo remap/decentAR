@@ -1,11 +1,9 @@
-import Uploader from "./components/Uploader";
-import Viewer from "./components/Viewer";
-// import './css/App.css';
+import SceneEditor from "./components/SceneEditor";
 
 function App() {
   return (
     <div className="App">
-      <Viewer/>
+      <SceneEditor/>
     </div>
   );
 }
