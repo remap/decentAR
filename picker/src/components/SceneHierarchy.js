@@ -12,8 +12,9 @@ const SceneHierarchy = (props) => {
             <Card.Header>Items</Card.Header>
             <ListGroup variant="flush">
                 {Object.entries(props.sceneJSON).map(([index, item]) => {
+                    console.log(item);
                     return item.url && 
-                    <ListGroup.Item action onClick={props.onClickHierarchyItem} key={index}> {index} </ListGroup.Item>;
+                    <ListGroup.Item action onClick={() => props.onClickHierarchyItem(index)} key={index}> {index} </ListGroup.Item>;
                 })}
             </ListGroup>
         </Card>

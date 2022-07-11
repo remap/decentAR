@@ -1,14 +1,26 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
 import SceneHierarchy from './SceneHierarchy';
 import SceneViewer from './SceneViewer';
 import ObjectEditor from './ObjectEditor';
 import '../css/SceneEditor.css';
 
-const placeholderJSON = {"1":{"url":"https://decentar-bucket.s3.us-west-1.amazonaws.com/decentar_objects_gold.glb","position":{"x":0,"y":0,"z":0},"rotation":{"pitch":30,"yaw":0,"roll":0}},"2":{"url":"https://decentar-bucket.s3.us-west-1.amazonaws.com/decentar_objects_gold.glb","position":{"x":3,"y":0,"z":0},"rotation":{"pitch":0,"yaw":5,"roll":0}},"3":{"url":"https://decentar-bucket.s3.us-west-1.amazonaws.com/decentar_objects_plant.glb","position":{"x":5,"y":0,"z":0},"rotation":{"pitch":0,"yaw":10,"roll":50}},"originPoint":{"x":1,"y":0,"z":0}};
-
 const SceneEditor = () => {
-    const onClickHierarchyItem = () => {
-        console.log("Clicked hierarchy item!");
+    const [sceneJSON, setSceneJSON] = useState({});
+    const [selectedItemKey, setSelectedItemKey] = useState(null);
+
+    useEffect(() => {
+        async function fetchData() {
+            const request= await axios.get("https://decentar-bucket.s3.us-west-1.amazonaws.com/decentar_scenes_scene.json");
+            setSceneJSON(request.data);
+            return request.data;
+        }
+        fetchData();
+    }, []);
+
+    const onClickHierarchyItem = (itemKey) => {
+        let newItemKey = itemKey
+        setSelectedItemKey(newItemKey);
     }
 
     const onSubmitObjectEditor = (values) => {
@@ -17,9 +29,9 @@ const SceneEditor = () => {
 
     return (
         <div className='scene-editor'>
-            <SceneHierarchy sceneJSON={placeholderJSON} onClickHierarchyItem={onClickHierarchyItem}/>
-            <SceneViewer sceneJSON={placeholderJSON}/>
-            <ObjectEditor onSubmitObjectEditor={onSubmitObjectEditor}/>
+            <SceneHierarchy sceneJSON={sceneJSON} onClickHierarchyItem={onClickHierarchyItem}/>
+            <SceneViewer sceneJSON={sceneJSON}/>
+            <ObjectEditor onSubmitObjectEditor={onSubmitObjectEditor} sceneJSON={sceneJSON}/>
         </div>
     );
 }
