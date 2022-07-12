@@ -1,120 +1,81 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { Formik } from "formik";
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import Col from 'react-bootstrap/Col';
 import Row from 'react-bootstrap/Row';
 
+const placeholderItemValue = {url: "", position: {x:'', y:'', z:''}, rotation: {pitch:'', yaw:'', roll:''}};
+
 const ObjectEditor = (props) => {
+    const [tentativeItemValue, setTentativeItemValue] = useState(placeholderItemValue);
+
+    useEffect(() => {
+        setTentativeItemValue(props.itemValue);
+    }, []);
+
+    const onChangeField = (e, field, type) => {
+        let newValue = {...tentativeItemValue};
+        if (type === "number") {
+            newValue[field] = parseFloat(e.target.value);
+        } else {
+            newValue[field] = e.target.value;
+        }
+        setTentativeItemValue(newValue);
+    }
+
+    const onChangeObject = (e, field_1, field_2, type) => {
+        let newValue = {...tentativeItemValue};
+        if (type === "number") {
+            newValue[field_1][field_2] = parseFloat(e.target.value);
+        } else {
+            newValue[field_1][field_2] = e.target.value;
+        }
+        setTentativeItemValue(newValue);
+    }
+
     return (
         <div className='object-editor'>
-            {Object.entries(props.sceneJSON).map(([index, item]) => {
-                return item.url && 
-                    <Formik
-                    key={index}
-                    onSubmit={props.onSubmitObjectEditor}
-                    initialValues={{
-                        url: item.url,
-                        x: parseFloat(item.x),
-                        y: parseFloat(item.y),
-                        z: parseFloat(item.z),
-                        pitch: parseFloat(item.pitch),
-                        yaw: parseFloat(item.yaw),
-                        roll: parseFloat(item.roll),
-                    }}
-                >
-                {({
-                    handleSubmit,
-                    handleChange,
-                    handleBlur,
-                    values,
-                    touched,
-                    isValid,
-                    errors,
-                }) => (
-                    <Form noValidate onSubmit={handleSubmit}>
-                        <Form.Group>
-                            <Form.Label>URL</Form.Label>
-                            <Form.Control
-                                type="text"
-                                name="url"
-                                value={values.url}
-                                onChange={handleChange}
-                                isValid={touched.url && !errors.url}
-                            />
-                        </Form.Group>
+            <Form onSubmit={(e) => props.onSubmitObjectEditor(e, tentativeItemValue, props.index)}>
+                <Form.Group>
+                    <Form.Label>URL</Form.Label>
+                    <Form.Control type="text" onChange={(e) => onChangeField(e, "url", "text")} value={tentativeItemValue.url}/>
+                </Form.Group>
 
-                        <Row>
-                            <Form.Group as={Col}>
-                                <Form.Label>x</Form.Label>
-                                <Form.Control
-                                    type="number"
-                                    name="x"
-                                    value={values.x}
-                                    onChange={handleChange}
-                                    isValid={touched.x && !errors.x}
-                                />
-                            </Form.Group>
-                            <Form.Group as={Col}>
-                                <Form.Label>y</Form.Label>
-                                <Form.Control
-                                    type="number"
-                                    name="y"
-                                    value={values.y}
-                                    onChange={handleChange}
-                                    isValid={touched.y && !errors.y}
-                                />
-                            </Form.Group>
-                            <Form.Group as={Col}>
-                                <Form.Label>z</Form.Label>
-                                <Form.Control
-                                    type="number"
-                                    name="z"
-                                    value={values.z}
-                                    onChange={handleChange}
-                                    isValid={touched.z && !errors.z}
-                                />
-                            </Form.Group>
-                        </Row>
-                        
-                        <Row>
-                            <Form.Group as={Col}>
-                                <Form.Label>Pitch</Form.Label>
-                                <Form.Control
-                                    type="number"
-                                    name="pitch"
-                                    value={values.pitch}
-                                    onChange={handleChange}
-                                    isValid={touched.pitch && !errors.pitch}
-                                />
-                            </Form.Group>
-                            <Form.Group as={Col}>
-                                <Form.Label>Yaw</Form.Label>
-                                <Form.Control
-                                    type="number"
-                                    name="yaw"
-                                    value={values.yaw}
-                                    onChange={handleChange}
-                                    isValid={touched.yaw && !errors.yaw}
-                                />
-                            </Form.Group>
-                            <Form.Group as={Col}>
-                                <Form.Label>Roll</Form.Label>
-                                <Form.Control
-                                    type="number"
-                                    name="roll"
-                                    value={values.roll}
-                                    onChange={handleChange}
-                                    isValid={touched.roll && !errors.roll}
-                                />
-                            </Form.Group>
-                        </Row>   
-
-                        <Button type="submit">Submit form</Button>
-                    </Form>
-                )}
-                </Formik>
-            })}
+                <Row>
+                    <Form.Group as={Col}>
+                        <Form.Label>x</Form.Label>
+                        <Form.Control type="number" onChange={(e) => onChangeObject(e, "position", "x", "number")} value={tentativeItemValue.position.x}/>
+                    </Form.Group>
+                    <Form.Group as={Col}>
+                        <Form.Label>y</Form.Label>
+                        <Form.Control type="number" onChange={(e) => onChangeObject(e, "position", "y", "number")} value={tentativeItemValue.position.y}/>
+                    </Form.Group>
+                    <Form.Group as={Col}>
+                        <Form.Label>z</Form.Label>
+                        <Form.Control type="number" onChange={(e) => onChangeObject(e, "position", "z", "number")} value={tentativeItemValue.position.z}/>
+                    </Form.Group>
+                </Row>
+                
+                <Row>
+                    <Form.Group as={Col}>
+                        <Form.Label>Pitch</Form.Label>
+                        <Form.Control type="number" onChange={(e) => onChangeObject(e, "rotation", "pitch", "number")} value={tentativeItemValue.rotation.pitch}/>
+                    </Form.Group>
+                    <Form.Group as={Col}>
+                        <Form.Label>Yaw</Form.Label>
+                        <Form.Control type="number" onChange={(e) => onChangeObject(e, "rotation", "yaw", "number")} value={tentativeItemValue.rotation.yaw}/>
+                    </Form.Group>
+                    <Form.Group as={Col}>
+                        <Form.Label>Roll</Form.Label>
+                        <Form.Control type="number" onChange={(e) => onChangeObject(e, "rotation", "roll", "number")} value={tentativeItemValue.rotation.roll}/>
+                    </Form.Group>
+                </Row>   
+                    
+                <Button variant="primary" type="submit">
+                    Submit
+                </Button>
+            </Form>
         </div>
   );
 }

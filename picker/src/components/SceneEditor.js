@@ -2,12 +2,10 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import SceneHierarchy from './SceneHierarchy';
 import SceneViewer from './SceneViewer';
-import ObjectEditor from './ObjectEditor';
 import '../css/SceneEditor.css';
 
 const SceneEditor = () => {
     const [sceneJSON, setSceneJSON] = useState({});
-    const [selectedItemKey, setSelectedItemKey] = useState(null);
 
     useEffect(() => {
         async function fetchData() {
@@ -18,20 +16,21 @@ const SceneEditor = () => {
         fetchData();
     }, []);
 
-    const onClickHierarchyItem = (itemKey) => {
-        let newItemKey = itemKey
-        setSelectedItemKey(newItemKey);
-    }
-
-    const onSubmitObjectEditor = (values) => {
-        console.log(`MY LITTLE OBJECT VALUES: ${JSON.stringify(values)}`);
+    const onSubmitObjectEditor = (e, itemValue, index) => {
+        let newSceneJSON = {...sceneJSON};
+        newSceneJSON[index] = itemValue;
+        setSceneJSON(newSceneJSON);
+        axios.put("https://decentar-bucket.s3.us-west-1.amazonaws.com/decentar_scenes_scene.json", newSceneJSON, {headers: {'Content-Type': 'application/json', 'Access-Control-Allow-Origin': '*'}});
+        e.preventDefault();
     }
 
     return (
         <div className='scene-editor'>
-            <SceneHierarchy sceneJSON={sceneJSON} onClickHierarchyItem={onClickHierarchyItem}/>
+            <SceneHierarchy sceneJSON={sceneJSON}
+                            onSubmitObjectEditor={onSubmitObjectEditor}
+                            style={{minWidth:'50rem'}}
+            />
             <SceneViewer sceneJSON={sceneJSON}/>
-            <ObjectEditor onSubmitObjectEditor={onSubmitObjectEditor} sceneJSON={sceneJSON}/>
         </div>
     );
 }

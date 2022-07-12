@@ -1,6 +1,7 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import Card from 'react-bootstrap/Card';
 import ListGroup from 'react-bootstrap/ListGroup';
+import ObjectEditor from './ObjectEditor';
 
 // Renders a card containing a list item for each object in props.sceneJSON.
 // Each item consists of the ID of the object.
@@ -8,13 +9,14 @@ import ListGroup from 'react-bootstrap/ListGroup';
 const SceneHierarchy = (props) => {
   return (
     <div className='scene-hierarchy'>
-        <Card>
+        <Card style={{width: '25rem'}}>
             <Card.Header>Items</Card.Header>
-            <ListGroup variant="flush">
+            <ListGroup variant="flush" style={{overflow: 'scroll'}}>
                 {Object.entries(props.sceneJSON).map(([index, item]) => {
-                    console.log(item);
                     return item.url && 
-                    <ListGroup.Item action onClick={() => props.onClickHierarchyItem(index)} key={index}> {index} </ListGroup.Item>;
+                    <ListGroup.Item key={index} style={{display:'flex'}}>
+                      <ObjectEditor onSubmitObjectEditor={props.onSubmitObjectEditor} itemValue={item} index={index}/>
+                    </ListGroup.Item>;
                 })}
             </ListGroup>
         </Card>
