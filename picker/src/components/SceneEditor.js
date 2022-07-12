@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import SceneHierarchy from './SceneHierarchy';
+import ObjectHierarchy from './ObjectHierarchy';
 import SceneViewer from './SceneViewer';
 import '../css/SceneEditor.css';
 
@@ -26,7 +26,7 @@ const SceneEditor = () => {
 
     return (
         <div className='scene-editor'>
-            <SceneHierarchy sceneJSON={sceneJSON}
+            <ObjectHierarchy sceneJSON={sceneJSON}
                             onSubmitObjectEditor={onSubmitObjectEditor}
                             style={{minWidth:'50rem'}}
             />

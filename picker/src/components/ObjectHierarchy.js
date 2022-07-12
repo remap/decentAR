@@ -6,12 +6,12 @@ import ObjectEditor from './ObjectEditor';
 // Renders a card containing a list item for each object in props.sceneJSON.
 // Each item consists of the ID of the object.
 // Upon clicking each item, onClickHierarchyItem is called.
-const SceneHierarchy = (props) => {
+const ObjectHierarchy = (props) => {
   return (
-    <div className='scene-hierarchy'>
+    <div className='object-hierarchy'>
         <Card style={{width: '25rem'}}>
             <Card.Header>Items</Card.Header>
-            <ListGroup variant="flush" style={{overflow: 'scroll'}}>
+            <ListGroup variant="flush">
                 {Object.entries(props.sceneJSON).map(([index, item]) => {
                     return item.url && 
                     <ListGroup.Item key={index} style={{display:'flex'}}>
@@ -24,4 +24,4 @@ const SceneHierarchy = (props) => {
   );
 }
 
-export default SceneHierarchy;
+export default ObjectHierarchy;
