@@ -13,21 +13,21 @@ const ConfirmationModal = (props) => {
 
     return (
         <div>
-        <Button variant="primary" onClick={handleShow}>
-            Delete
-        </Button>
-
-        <Modal show={show} onHide={handleClose}>
-            <Modal.Body>Delete item? You will not be able to undo this action.</Modal.Body>
-            <Modal.Footer>
-            <Button variant="secondary" onClick={handleClose}>
-                Close
-            </Button>
-            <Button variant="primary" onClick={handleConfirm}>
+            <Button variant="primary" onClick={handleShow}>
                 Delete
             </Button>
-            </Modal.Footer>
-        </Modal>
+
+            <Modal show={show} onHide={handleClose}>
+                <Modal.Body>Delete item? You will not be able to undo this action.</Modal.Body>
+                <Modal.Footer>
+                <Button variant="secondary" onClick={handleClose}>
+                    Close
+                </Button>
+                <Button variant="primary" onClick={handleConfirm}>
+                    Delete
+                </Button>
+                </Modal.Footer>
+            </Modal>
         </div>
     );
 }

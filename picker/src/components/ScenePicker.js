@@ -17,13 +17,15 @@ const ScenePicker = (props) => {
         <div className='scene-picker'>
             <Form onSubmit={(e) => props.pickScene(e, tentativeSceneValue)}>
                 <Form.Group>
-                    <Form.Label>URL</Form.Label>
-                    <Form.Control type="text" onChange={(e) => onChangeField(e, "url", "text")} value={tentativeSceneValue}/>
+                    <Form.Label>Scene URL</Form.Label>
+                    <div style={{display: 'flex', flexDirection: 'row'}}>
+                        <Form.Control type="text" onChange={(e) => onChangeField(e, "url", "text")} value={tentativeSceneValue}/>
+                        <Button variant="primary" type="submit">
+                            Submit
+                        </Button>
+                    </div>
                 </Form.Group>
-
-                <Button variant="primary" type="submit">
-                    Submit
-                </Button>
+                
             </Form>
         </div>
     );

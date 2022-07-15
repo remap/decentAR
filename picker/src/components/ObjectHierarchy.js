@@ -4,16 +4,16 @@ import ListGroup from 'react-bootstrap/ListGroup';
 import ObjectEditor from './ObjectEditor';
 import Button from 'react-bootstrap/Button';
 import { placeholderItemValue } from '../constants/constants';
+import '../css/ObjectHierarchy.css';
 
 // Renders a card containing a list item for each object in props.sceneJSON.
 // Each item consists of the ID of the object.
 // Upon clicking each item, onClickHierarchyItem is called.
 const ObjectHierarchy = (props) => {
   return (
-    <div className='object-hierarchy'>
-        <Card style={{width: '25rem'}}>
+    <Card className="object-hierarchy">
             <Card.Header>Items</Card.Header>
-            <ListGroup variant="flush">
+            <ListGroup variant="flush" style={{overflow: 'scroll'}}>
                 {Object.entries(props.sceneJSON).map(([index, item]) => {
                     return (index !== "originPoint") && 
                     <ListGroup.Item key={index} style={{display:'flex'}}>
@@ -27,8 +27,7 @@ const ObjectHierarchy = (props) => {
             <Button onClick={(e) => props.addNewObject(e, placeholderItemValue)}>
                 Add object
             </Button>
-        </Card>
-    </div>
+      </Card>
   );
 }
 

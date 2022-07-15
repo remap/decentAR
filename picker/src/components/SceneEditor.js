@@ -59,16 +59,15 @@ const SceneEditor = () => {
 
     return (
         <div className='scene-editor'>
-            <div>
-                <ScenePicker pickScene={pickScene}/>
-                <ObjectHierarchy sceneJSON={sceneJSON}
-                                addNewObject={addNewObject}
-                                onSubmitObjectEditor={onSubmitObjectEditor}
-                                onDeleteObject={onDeleteObject}
-                                style={{minWidth:'50rem'}}
+            <ObjectHierarchy sceneJSON={sceneJSON}
+                                    addNewObject={addNewObject}
+                                    onSubmitObjectEditor={onSubmitObjectEditor}
+                                    onDeleteObject={onDeleteObject}
                 />
+            <div style={{width:'100%', display: 'flex', flexDirection: 'column', rowGap: '2rem'}}>
+                <ScenePicker pickScene={pickScene}/>
+                <SceneViewer sceneJSON={sceneJSON}/>
             </div>
-            <SceneViewer sceneJSON={sceneJSON}/>
         </div>
     );
 }

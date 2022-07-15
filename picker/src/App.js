@@ -1,4 +1,5 @@
 import SceneEditor from "./components/SceneEditor";
+import './css/App.css';
 
 function App() {
   return (

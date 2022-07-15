@@ -37,7 +37,7 @@ const ObjectEditor = (props) => {
         <div className='object-editor'>
             <Form onSubmit={(e) => props.onSubmitObjectEditor(e, tentativeItemValue, props.index)}>
                 <Form.Group>
-                    <Form.Label>URL</Form.Label>
+                    <Form.Label>Object URL</Form.Label>
                     <Form.Control type="text" onChange={(e) => onChangeField(e, "url", "text")} value={tentativeItemValue.url}/>
                 </Form.Group>
 
@@ -69,11 +69,14 @@ const ObjectEditor = (props) => {
                         <Form.Label>Roll</Form.Label>
                         <Form.Control type="number" onChange={(e) => onChangeObject(e, "rotation", "roll", "number")} value={tentativeItemValue.rotation.roll}/>
                     </Form.Group>
-                </Row>   
-                <ConfirmationModal confirmArgs={{index: props.index}} onModalConfirm={props.onDeleteObject}/>
-                <Button variant="primary" type="submit">
-                    Submit
-                </Button>
+                </Row>
+
+                <div style={{display: 'flex', flexDirection: 'row', paddingTop: '0.75rem', justifyContent: 'space-between'}}>
+                    <ConfirmationModal confirmArgs={{index: props.index}} onModalConfirm={props.onDeleteObject}/>
+                    <Button variant="primary" type="submit">
+                        Submit
+                    </Button>
+                </div>
             </Form>
         </div>
   );
