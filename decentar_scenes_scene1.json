@@ -1,10 +1,4 @@
-{ 
-    "1": {
-        "name":"decentar_objects_plant.glb",
-        "position": "FILLER TEXT FOR POSITION OF PLANT"
-    },
-    "2": {
-        "name":"decentar_objects_gold_glb",
-        "position": "FILLER TEXT FOR POSITION OF GOLD"
-    }
+{
+    "1":{"url":"https://decentar-bucket.s3.us-west-1.amazonaws.com/decentar_objects_lamp.glb","position":{"x":6,"y":0,"z":0},"rotation":{"pitch":0,"yaw":0,"roll":0}},
+    "originPoint":{"x":0,"y":0,"z":0}
 }

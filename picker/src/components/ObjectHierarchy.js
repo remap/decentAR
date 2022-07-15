@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react';
 import Card from 'react-bootstrap/Card';
 import ListGroup from 'react-bootstrap/ListGroup';
 import ObjectEditor from './ObjectEditor';
+import Button from 'react-bootstrap/Button';
+import { placeholderItemValue } from '../constants/constants';
 
 // Renders a card containing a list item for each object in props.sceneJSON.
 // Each item consists of the ID of the object.
@@ -13,12 +15,18 @@ const ObjectHierarchy = (props) => {
             <Card.Header>Items</Card.Header>
             <ListGroup variant="flush">
                 {Object.entries(props.sceneJSON).map(([index, item]) => {
-                    return item.url && 
+                    return (index !== "originPoint") && 
                     <ListGroup.Item key={index} style={{display:'flex'}}>
-                      <ObjectEditor onSubmitObjectEditor={props.onSubmitObjectEditor} itemValue={item} index={index}/>
+                      <ObjectEditor onSubmitObjectEditor={props.onSubmitObjectEditor} 
+                                    onDeleteObject={props.onDeleteObject}
+                                    itemValue={item} 
+                                    index={index}/>
                     </ListGroup.Item>;
                 })}
             </ListGroup>
+            <Button onClick={(e) => props.addNewObject(e, placeholderItemValue)}>
+                Add object
+            </Button>
         </Card>
     </div>
   );

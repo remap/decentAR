@@ -1,11 +1,10 @@
 import React, { useState, useEffect } from 'react';
-import { Formik } from "formik";
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import Col from 'react-bootstrap/Col';
 import Row from 'react-bootstrap/Row';
-
-const placeholderItemValue = {url: "", position: {x:'', y:'', z:''}, rotation: {pitch:'', yaw:'', roll:''}};
+import { placeholderItemValue } from '../constants/constants';
+import ConfirmationModal from './ConfirmationModal';
 
 const ObjectEditor = (props) => {
     const [tentativeItemValue, setTentativeItemValue] = useState(placeholderItemValue);
@@ -71,7 +70,7 @@ const ObjectEditor = (props) => {
                         <Form.Control type="number" onChange={(e) => onChangeObject(e, "rotation", "roll", "number")} value={tentativeItemValue.rotation.roll}/>
                     </Form.Group>
                 </Row>   
-                    
+                <ConfirmationModal index={props.index} onDeleteObject={props.onDeleteObject}/>
                 <Button variant="primary" type="submit">
                     Submit
                 </Button>
