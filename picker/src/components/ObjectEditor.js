@@ -70,7 +70,7 @@ const ObjectEditor = (props) => {
                         <Form.Control type="number" onChange={(e) => onChangeObject(e, "rotation", "roll", "number")} value={tentativeItemValue.rotation.roll}/>
                     </Form.Group>
                 </Row>   
-                <ConfirmationModal index={props.index} onDeleteObject={props.onDeleteObject}/>
+                <ConfirmationModal confirmArgs={{index: props.index}} onModalConfirm={props.onDeleteObject}/>
                 <Button variant="primary" type="submit">
                     Submit
                 </Button>

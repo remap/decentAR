@@ -6,9 +6,9 @@ const ConfirmationModal = (props) => {
     const [show, setShow] = useState(false);
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
-    const handleCloseDelete = (e) => {
+    const handleConfirm = (e) => {
         setShow(false);
-        props.onDeleteObject(e, props.index);
+        props.onModalConfirm({e:e, ...props.confirmArgs});
     }
 
     return (
@@ -23,7 +23,7 @@ const ConfirmationModal = (props) => {
             <Button variant="secondary" onClick={handleClose}>
                 Close
             </Button>
-            <Button variant="primary" onClick={handleCloseDelete}>
+            <Button variant="primary" onClick={handleConfirm}>
                 Delete
             </Button>
             </Modal.Footer>

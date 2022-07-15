@@ -7,9 +7,11 @@ import ScenePicker from './ScenePicker';
 import '../css/SceneEditor.css';
 import { bucketURL } from '../constants/constants';
 
+const placeholderURL = bucketURL + "decentar_scenes_scene" + ".json";
+
 const SceneEditor = () => {
     const [sceneJSON, setSceneJSON] = useState({});
-    const [sceneURL, setSceneURL] = useState(null);
+    const [sceneURL, setSceneURL] = useState(placeholderURL);
 
     useEffect(() => {
         async function fetchData(sceneURL) {
@@ -41,7 +43,7 @@ const SceneEditor = () => {
         e.preventDefault();
     }
 
-    const onDeleteObject = (e, index) => {
+    const onDeleteObject = ({e, index}) => {
         let newSceneJSON = {...sceneJSON};
         delete newSceneJSON[index];
         setSceneJSON(newSceneJSON);
