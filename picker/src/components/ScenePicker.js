@@ -17,7 +17,7 @@ const ScenePicker = (props) => {
         <div className='scene-picker'>
             <Form onSubmit={(e) => props.pickScene(e, tentativeSceneValue)}>
                 <Form.Group>
-                    <Form.Label>Scene URL</Form.Label>
+                    <Form.Label>Scene Name</Form.Label>
                     <div style={{display: 'flex', flexDirection: 'row'}}>
                         <Form.Control type="text" onChange={(e) => onChangeField(e, "url", "text")} value={tentativeSceneValue}/>
                         <Button variant="primary" type="submit">
