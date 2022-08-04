@@ -10,6 +10,9 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
+          with:
+            cache: 'npm'
+            cache-dependency-path: './server/package-lock.json'
       - name: Configure AWS Credentials
         uses: aws-actions/configure-aws-credentials@v1
         with:
