@@ -1,10 +1,11 @@
-import SceneEditor from "./components/SceneEditor";
+import SceneEditor from "./sceneEditor/SceneEditor";
+import Navigator from "./navigator/Navigator";
 import './css/App.css';
 
 function App() {
   return (
     <div className="App">
-      <SceneEditor/>
+      <Navigator/>
     </div>
   );
 }
