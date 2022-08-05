@@ -3,28 +3,31 @@ import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 
 const NavSelector = (props) => {
-    const [tentativeSceneValue, setTentativeSceneValue] = useState("");
+    const [tentativeSceneURL, setTentativeSceneURL] = useState("");
 
     useEffect(() => {
-        setTentativeSceneValue("");
+        setTentativeSceneURL("");
     }, []);
 
     const onChangeField = (e) => {
-        setTentativeSceneValue(e.target.value);
+        setTentativeSceneURL(e.target.value);
     }
 
-    const addScene = (e, tentativeSceneValue) => {
-        props.addScene(e, tentativeSceneValue);
-        setTentativeSceneValue("");
+    const addScene = (e, tentativeSceneURL) => {
+        e.preventDefault();
+        if (tentativeSceneURL) {
+            props.addScene(e, tentativeSceneURL);
+            setTentativeSceneURL("");
+        }
     }
 
     return (
         <div className='nav-selector'>
-            <Form onSubmit={(e) => addScene(e, tentativeSceneValue)}>
+            <Form onSubmit={(e) => addScene(e, tentativeSceneURL)}>
                 <Form.Group>
                     <Form.Label>Scene Name</Form.Label>
                     <div style={{display: 'flex', flexDirection: 'row'}}>
-                        <Form.Control type="text" onChange={(e) => onChangeField(e, "url", "text")} value={tentativeSceneValue}/>
+                        <Form.Control type="text" onChange={(e) => onChangeField(e, "url", "text")} value={tentativeSceneURL}/>
                         <Button variant="primary" type="submit">
                             Submit
                         </Button>
