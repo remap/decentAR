@@ -5,7 +5,10 @@ import NavList from './NavList';
 import axios from 'axios';
 
 const Navigator = (props) => {
-    const [sceneURLList, setSceneURLList] = useState(["https://decentar-bucket.s3.us-west-1.amazonaws.com/decentar_scenes_scene.json","https://decentar-bucket.s3.us-west-1.amazonaws.com/decentar_scenes_scene1.json","https://decentar-bucket.s3.us-west-1.amazonaws.com/decentar_scenes_scene.json","https://decentar-bucket.s3.us-west-1.amazonaws.com/decentar_scenes_scene1.json"]);
+    const [sceneURLList, setSceneURLList] = useState([  "https://decentar-bucket.s3.us-west-1.amazonaws.com/decentar_scenes_scene.json",
+                                                        "https://decentar-bucket.s3.us-west-1.amazonaws.com/decentar_scenes_scene1.json",
+                                                        "https://decentar-bucket.s3.us-west-1.amazonaws.com/decentar_scenes_scene.json",
+                                                        "https://decentar-bucket.s3.us-west-1.amazonaws.com/decentar_scenes_scene1.json"]);
     const [sceneJSONList, setSceneJSONList] = useState([]);
 
     // Init sceneJSONList w/ get requests from URLS in sceneURLList
@@ -39,7 +42,7 @@ const Navigator = (props) => {
         <div className='navigator'>
             <NavSelector addScene={addScene}/>
             <NavList sceneList={sceneURLList}/>
-            <NavViewer sceneJSON={sceneJSONList}/>
+            <NavViewer sceneJSONList={sceneJSONList}/>
         </div>
     );
 }

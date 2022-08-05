@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import Card from 'react-bootstrap/Card';
 import ListGroup from 'react-bootstrap/ListGroup';
-import uuid from 'react-uuid';
 
 const NavList = (props) => {    
     return (
