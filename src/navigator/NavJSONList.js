@@ -2,11 +2,11 @@ import React, { useState, useEffect } from 'react';
 import Card from 'react-bootstrap/Card';
 import ListGroup from 'react-bootstrap/ListGroup';
 
-const NavViewer = (props) => {
+const NavJSONList = (props) => {
     return (
-        <div className='nav-viewer'>
+        <div className='nav-jsonlist'>
             <Card className="nav-list">
-                <Card.Header>NAV VIEWER</Card.Header>
+                <Card.Header>SCENE JSON</Card.Header>
                 <ListGroup variant="flush" style={{overflow: 'scroll'}}>
                     {props.sceneJSONList.map((sceneJSON, index) => 
                         <ListGroup.Item key={index} style={{display:'flex'}}>
@@ -19,4 +19,4 @@ const NavViewer = (props) => {
     );
 }
 
-export default NavViewer;
+export default NavJSONList;

@@ -25,7 +25,7 @@ const NavSelector = (props) => {
         <div className='nav-selector'>
             <Form onSubmit={(e) => addScene(e, tentativeSceneURL)}>
                 <Form.Group>
-                    <Form.Label>Scene Name</Form.Label>
+                    <Form.Label>SCENE NAME</Form.Label>
                     <div style={{display: 'flex', flexDirection: 'row'}}>
                         <Form.Control type="text" onChange={(e) => onChangeField(e, "url", "text")} value={tentativeSceneURL}/>
                         <Button variant="primary" type="submit">

@@ -5,7 +5,8 @@
     width: 100vw;
     justify-content: center;
     align-items: center;
-    padding: 2rem;
+    padding: 1rem;
+    column-gap: 2rem;
 }
 
 html,body{margin:0;padding:0;}

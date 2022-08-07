@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import NavSelector from './NavSelector';
-import NavViewer from './NavViewer';
+import NavJSONList from './NavJSONList';
 import NavList from './NavList';
 import axios from 'axios';
+import '../css/Navigator.css';
 
 const Navigator = (props) => {
     const [sceneURLList, setSceneURLList] = useState([  "https://decentar-bucket.s3.us-west-1.amazonaws.com/decentar_scenes_scene.json",
@@ -42,7 +43,7 @@ const Navigator = (props) => {
         <div className='navigator'>
             <NavSelector addScene={addScene}/>
             <NavList sceneList={sceneURLList}/>
-            <NavViewer sceneJSONList={sceneJSONList}/>
+            <NavJSONList sceneJSONList={sceneJSONList}/>
         </div>
     );
 }
