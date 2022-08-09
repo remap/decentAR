@@ -35,12 +35,13 @@ const initXrScene = () => {
   // keep our data at ndn.<domain>
   
   console.log(`FETCHING: https://cloudflare-dns.com/dns-query?name=ndn.${window.location.hostname}&type=TXT&server=8.8.4.4`);
-  fetch(`https://cloudflare-dns.com/dns-query?name=ndn.${window.location.hostname}&type=TXT&server=8.8.4.4`, {
-    method: 'GET',
-    headers: {
-      'Accept': 'application/dns-json',
-    }
-  })
+  try {
+    fetch(`https://cloudflare-dns.com/dns-query?name=ndn.${window.location.hostname}&type=TXT&server=8.8.4.4`, {
+      method: 'GET',
+      headers: {
+        'Accept': 'application/dns-json',
+      }
+    })
     .then(response => {
       console.log(`RESPONSE: ${response}`);
       return response.json();
@@ -65,6 +66,9 @@ const initXrScene = () => {
     })
     .then(scene => (!!scene ? scene.json() : ""))
     .then(sceneJSON => parseSceneJSON(sceneJSON, scene));
+  } catch (error) {
+    console.log('Error: ', error)
+  }
  
   // Fetched scene file and instantiated and positioned specifieed models.
   // Light.
