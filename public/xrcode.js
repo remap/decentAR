@@ -10,6 +10,10 @@ let surface, engine, scene, camera
 
 // Given an input JSON file, instantiate and position all models specified in the file relative to the specified origin.
 const parseSceneJSON = (inputScene, scene) => {
+  if (!inputScene) {
+    return;
+  }
+
   Object.entries(inputScene).forEach(([key, value]) => {
     const originPoint = Object.keys(inputScene).includes('originPoint') ? inputScene.originPoint : {"x": 0 , "y": 0, "z": 0}
     if (key !== 'originPoint') {
@@ -39,7 +43,7 @@ const initXrScene = () => {
     .then(data => {
       console.log(data)
       console.log(`MYDATA: ${JSON.stringify(data)}`)
-      let sceneurl='https://decentar-bucket.s3.us-west-1.amazonaws.com/decentar_scenes_scene1.json'
+      let sceneurl=''
       if (typeof data.Answer != 'undefined') { 
         data.Answer.forEach(function(txt,k) {
           let split=txt.data.replaceAll('"','').split("=",2)
@@ -52,9 +56,9 @@ const initXrScene = () => {
         )
       }
         console.log(`SCENE URL: ${sceneurl}`)
-        return fetch(sceneurl)
+        return (!!sceneurl ? fetch(sceneurl) : "")
     })
-    .then(scene => scene.json())
+    .then(scene => (!!scene ? scene.json() : ""))
     .then(sceneJSON => parseSceneJSON(sceneJSON, scene))
  
   // Fetched scene file and instantiated and positioned specifieed models.
@@ -103,10 +107,8 @@ const onxrloaded = () => {
 const load = () => { XRExtras.Loading.showLoading({onxrloaded}) }
 window.onload = () => {
   if (window.XRExtras) {
-    console.log("aaa")
     load()
   } else {
-    console.log("bbbb")
     window.addEventListener('xrextrasloaded', load)
   }
 }
