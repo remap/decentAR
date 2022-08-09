@@ -44,7 +44,7 @@ const initXrScene = () => {
       console.log(`RESPONSE: ${response}`);
       return response.json();
     })
-    .then(data => {
+    .then(data => {;
       console.log(data)
       console.log(`DATA: ${JSON.stringify(data)}`)
       let sceneurl=''
@@ -111,6 +111,7 @@ const onxrloaded = () => {
 const load = () => { XRExtras.Loading.showLoading({onxrloaded}) }
 window.onload = () => {
   if (window.XRExtras) {
+    console.log("fdhjioveohioehr!");
     load()
   } else {
     window.addEventListener('xrextrasloaded', load)
