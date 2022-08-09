@@ -33,16 +33,20 @@ const parseSceneJSON = (inputScene, scene) => {
 const initXrScene = () => {
   // Can't have CNAMEs and TXT for the same record, so for flexibility,
   // keep our data at ndn.<domain>
+  console.log(`FETCHING: https://cloudflare-dns.com/dns-query?name=ndn.${window.location.hostname}&type=TXT&server=8.8.4.4}`)
   fetch(`https://cloudflare-dns.com/dns-query?name=ndn.${window.location.hostname}&type=TXT&server=8.8.4.4`, {
     method: 'GET',
     headers: {
       'Accept': 'application/dns-json',
     }
   })
-    .then(response => response.json())
+    .then(response => {
+      console.log(`RESPONSE: ${response}`);
+      return response.json();
+    })
     .then(data => {
       console.log(data)
-      console.log(`MYDATA: ${JSON.stringify(data)}`)
+      console.log(`DATA: ${JSON.stringify(data)}`)
       let sceneurl=''
       if (typeof data.Answer != 'undefined') { 
         data.Answer.forEach(function(txt,k) {
