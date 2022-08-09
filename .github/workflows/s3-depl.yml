@@ -1,4 +1,5 @@
-name: s3-depl:
+name: s3-depl
+on:
   pull_request:
   push:
     branches:
@@ -6,7 +7,18 @@ name: s3-depl:
 jobs:
   build:
     runs-on: ubuntu-latest
-    
     strategy:
       matrix:
-        node-version: [8.x, 10.x, 12.x, 14.x, 16.x]
+        node-version: [16.x]
+    steps:
+    - uses: actions/checkout@v1
+    - name: Use Node.js ${{ matrix.node-version }}
+      uses: actions/setup-node@v1
+      with:
+        node-version: ${{ matrix.node-version }}
+    - name: NPM Install
+      run: |
+        npm install
+    - name: Production Build
+      run: |
+        npm run build
