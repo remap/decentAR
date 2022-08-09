@@ -35,40 +35,40 @@ const initXrScene = () => {
   // keep our data at ndn.<domain>
   
   console.log(`FETCHING: https://cloudflare-dns.com/dns-query?name=ndn.${window.location.hostname}&type=TXT&server=8.8.4.4`);
-  try {
-    fetch(`https://cloudflare-dns.com/dns-query?name=ndn.${window.location.hostname}&type=TXT&server=8.8.4.4`, {
-      method: 'GET',
-      headers: {
-        'Accept': 'application/dns-json',
-      }
-    })
-    .then(response => {
-      console.log(`RESPONSE: ${response}`);
-      return response.json();
-    })
-    .then(data => {
-      console.log(data)
-      console.log(`DATA: ${JSON.stringify(data)}`)
-      let sceneurl=''
-      if (typeof data.Answer != 'undefined') { 
-        data.Answer.forEach(function(txt,k) {
-          let split=txt.data.replaceAll('"','').split("=",2)
-          let key = split[0]
-          let value = split[1]
-          console.log(`KEY: ${key}`)
-          if (key==="root_scene"){
-            sceneurl=value
-          }}
-        )
-      }
-      console.log(`SCENE URL: ${sceneurl}`);
-      return (!!sceneurl ? fetch(sceneurl) : "");
-    })
-    .then(scene => (!!scene ? scene.json() : ""))
-    .then(sceneJSON => parseSceneJSON(sceneJSON, scene));
-  } catch (error) {
-    console.log('Error: ', error)
-  }
+  // try {
+  //   fetch(`https://cloudflare-dns.com/dns-query?name=ndn.${window.location.hostname}&type=TXT&server=8.8.4.4`, {
+  //     method: 'GET',
+  //     headers: {
+  //       'Accept': 'application/dns-json',
+  //     }
+  //   })
+  //   .then(response => {
+  //     console.log(`RESPONSE: ${response}`);
+  //     return response.json();
+  //   })
+  //   .then(data => {
+  //     console.log(data)
+  //     console.log(`DATA: ${JSON.stringify(data)}`)
+  //     let sceneurl=''
+  //     if (typeof data.Answer != 'undefined') { 
+  //       data.Answer.forEach(function(txt,k) {
+  //         let split=txt.data.replaceAll('"','').split("=",2)
+  //         let key = split[0]
+  //         let value = split[1]
+  //         console.log(`KEY: ${key}`)
+  //         if (key==="root_scene"){
+  //           sceneurl=value
+  //         }}
+  //       )
+  //     }
+  //     console.log(`SCENE URL: ${sceneurl}`);
+  //     return (!!sceneurl ? fetch(sceneurl) : "");
+  //   })
+  //   .then(scene => (!!scene ? scene.json() : ""))
+  //   .then(sceneJSON => parseSceneJSON(sceneJSON, scene));
+  // } catch (error) {
+  //   console.log('Error: ', error)
+  // }
  
   // Fetched scene file and instantiated and positioned specifieed models.
   // Light.
