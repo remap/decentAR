@@ -1,12 +1,18 @@
-import SceneEditor from "./components/SceneEditor";
+import SceneEditor from "./sceneEditor/SceneEditor";
+import Navigator from "./navigator/Navigator";
+import uuid from 'react-uuid';
 import './css/App.css';
 
 function App() {
   return (
-    <div className="App">
-      <SceneEditor/>
+    <div className="App">  
+      <Navigator/>
+      <canvas style={{width: "100%", height: "100%"}}id="renderCanvas"></canvas>
     </div>
   );
 }
+
+// <div style={{width: "100%", height: "100%", backgroundColor: "blue"}}></div>
+// <canvas style={{width: "100%", height: "100%"}}id="renderCanvas"></canvas>
 
 export default App;
