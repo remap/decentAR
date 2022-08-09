@@ -46,7 +46,7 @@ const initXrScene = () => {
       console.log(`RESPONSE: ${response}`);
       return response.json();
     })
-    .then(data => {;
+    .then(data => {
       console.log(data)
       console.log(`DATA: ${JSON.stringify(data)}`)
       let sceneurl=''
