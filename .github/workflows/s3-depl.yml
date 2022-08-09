@@ -1,25 +1,12 @@
-name: s3-depl
-
-on:
+name: s3-depl:
+  pull_request:
   push:
     branches:
       - main
-
 jobs:
   build:
     runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v2
-        with:
-          cache: 'npm'
-          cache-dependency-path: './server/package-lock.json'
-      - name: Configure AWS Credentials
-        uses: aws-actions/configure-aws-credentials@v1
-        with:
-          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
-          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          aws-region: ${{ secrets.AWS_REGION }}
-      - name: Build React App
-        run: npm install && npm run build
-      - name: Deploy app build to S3 bucket
-        run: aws s3 sync ./dist/ s3://decentar-webapp --delete
+    
+    strategy:
+      matrix:
+        node-version: [8.x, 10.x, 12.x, 14.x, 16.x]
