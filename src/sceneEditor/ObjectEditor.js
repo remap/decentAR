@@ -11,7 +11,7 @@ const ObjectEditor = (props) => {
 
     useEffect(() => {
         setTentativeItemValue(props.itemValue);
-    }, []);
+    }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
     const onChangeField = (e, field, type) => {
         let newValue = {...tentativeItemValue};

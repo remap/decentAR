@@ -6,10 +6,11 @@ import '../css/SceneViewer.css';
 const SceneViewer = (props) => {
   return (
     <div className='scene-viewer'>
-      <a data-8code="jywmx"></a>
       <div style={{maxWidth: '50rem'}}>{JSON.stringify(props.sceneJSON)}</div>
     </div>
   );
 }
+
+// <a data-8code="jywmx"></a>
 
 export default SceneViewer;

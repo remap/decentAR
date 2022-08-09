@@ -7,7 +7,7 @@ import ScenePicker from './ScenePicker';
 import '../css/SceneEditor.css';
 import { bucketURL } from '../constants/constants';
 
-const placeholderURL = bucketURL + "decentar_scenes_scene" + ".json";
+const placeholderURL = bucketURL + "decentar_scenes_scene.json";
 
 const SceneEditor = () => {
     const [sceneJSON, setSceneJSON] = useState({});
