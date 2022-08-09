@@ -33,7 +33,8 @@ const parseSceneJSON = (inputScene, scene) => {
 const initXrScene = () => {
   // Can't have CNAMEs and TXT for the same record, so for flexibility,
   // keep our data at ndn.<domain>
-  console.log(`FETCHING: https://cloudflare-dns.com/dns-query?name=ndn.${window.location.hostname}&type=TXT&server=8.8.4.4}`)
+  
+  console.log(`FETCHING: https://cloudflare-dns.com/dns-query?name=ndn.${window.location.hostname}&type=TXT&server=8.8.4.4`);
   fetch(`https://cloudflare-dns.com/dns-query?name=ndn.${window.location.hostname}&type=TXT&server=8.8.4.4`, {
     method: 'GET',
     headers: {
@@ -59,11 +60,11 @@ const initXrScene = () => {
           }}
         )
       }
-        console.log(`SCENE URL: ${sceneurl}`)
-        return (!!sceneurl ? fetch(sceneurl) : "")
+      console.log(`SCENE URL: ${sceneurl}`);
+      return (!!sceneurl ? fetch(sceneurl) : "");
     })
     .then(scene => (!!scene ? scene.json() : ""))
-    .then(sceneJSON => parseSceneJSON(sceneJSON, scene))
+    .then(sceneJSON => parseSceneJSON(sceneJSON, scene));
  
   // Fetched scene file and instantiated and positioned specifieed models.
   // Light.

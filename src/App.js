@@ -6,7 +6,7 @@ function App() {
   return (
     <div className="App">  
       <Navigator/>
-      <div style={{width: "100%", height: "100%", backgroundColor: "blue"}}></div>
+      <canvas style={{width: "100%", height: "100%"}}id="renderCanvas"></canvas>
     </div>
   );
 }
