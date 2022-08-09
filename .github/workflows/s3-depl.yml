@@ -1,4 +1,5 @@
 name: s3-depl
+on:
   pull_request:
   push:
     branches:
