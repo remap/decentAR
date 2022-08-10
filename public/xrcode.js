@@ -76,9 +76,9 @@ const initXrScene = () => {
   light.intensity = 1.0
 
   const ground = BABYLON.Mesh.CreatePlane('ground', 100, scene)
-  ground.rotation.x = Math.PI / 2
-  ground.material = new BABYLON.StandardMaterial('groundMaterial', scene)
-  ground.material.diffuseColor = BABYLON.Color3.Purple()
+  ground.rotation.x = Math.PI / 2;
+  ground.material = new BABYLON.StandardMaterial('groundMaterial', scene);
+  ground.material.diffuseColor = BABYLON.Color3.Purple();
   ground.material.alpha = 0
   surface = ground
 
