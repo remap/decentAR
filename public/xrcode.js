@@ -10,6 +10,7 @@ let surface, engine, scene, camera
 
 // Given an input JSON file, instantiate and position all models specified in the file relative to the specified origin.
 const parseSceneJSON = (inputScene) => {
+  console.log('aa');
   if (!inputScene) {
     return;
   }
