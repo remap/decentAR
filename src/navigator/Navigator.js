@@ -6,10 +6,7 @@ import axios from 'axios';
 import '../css/Navigator.css';
 
 const Navigator = (props) => {
-    const [sceneURLList, setSceneURLList] = useState([  "https://decentar-bucket.s3.us-west-1.amazonaws.com/decentar_scenes_scene.json",
-                                                        "https://decentar-bucket.s3.us-west-1.amazonaws.com/decentar_scenes_scene1.json",
-                                                        "https://decentar-bucket.s3.us-west-1.amazonaws.com/decentar_scenes_scene.json",
-                                                        "https://decentar-bucket.s3.us-west-1.amazonaws.com/decentar_scenes_scene1.json"]);
+    const [sceneURLList, setSceneURLList] = useState([]);
     const [sceneJSONList, setSceneJSONList] = useState([]);
 
     // Init sceneJSONList w/ get requests from URLS in sceneURLList
