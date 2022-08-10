@@ -14,6 +14,7 @@ const Navigator = (props) => {
 
     // Init sceneJSONList w/ get requests from URLS in sceneURLList
     useEffect(() => {
+        console.log('aa');
         async function fetchData(sceneURLList) {
             Promise.all(sceneURLList.map((sceneURL) => axios.get(sceneURL))).then(
                 (responseList) => {
