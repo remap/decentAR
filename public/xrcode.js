@@ -9,7 +9,7 @@ const animationMillis = 750                             // Animate over 0.75 sec
 let surface, engine, scene, camera
 
 // Given an input JSON file, instantiate and position all models specified in the file relative to the specified origin.
-const parseSceneJSON = (inputScene, scene) => {
+const parseSceneJSON = (inputScene) => {
   if (!inputScene) {
     return;
   }
@@ -65,7 +65,7 @@ const initXrScene = () => {
       return (!!sceneurl ? fetch(sceneurl) : "");
     })
     .then(scene => (!!scene ? scene.json() : ""))
-    .then(sceneJSON => parseSceneJSON(sceneJSON, scene));
+    .then(sceneJSON => parseSceneJSON(sceneJSON));
   } catch (error) {
     console.log('Error: ', error)
   }
