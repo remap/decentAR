@@ -1,15 +1,9 @@
-/* globals BABYLON TWEEN XR8 XRExtras */
+/* globals BABYLON XR8 XRExtras */
 
-const modelRootURL = './'                               // Directory where 3D model lives
-const modelFile = 'tree.glb'                            // 3D model to spawn at tap
-const startScale = new BABYLON.Vector3(0.1, 0.1, -0.1)  // Initial scale value for our model
-const endScale = new BABYLON.Vector3(2.0, 2.0, -2.0)    // Ending scale value for our model
-const animationMillis = 750                             // Animate over 0.75 seconds
-
-let surface, engine, scene, camera
+let scene, surface, engine, camera
 
 // Given an input JSON file, instantiate and position all models specified in the file relative to the specified origin.
-export const parseSceneJSON = (inputScene) => {
+const parseSceneJSON = (inputScene) => {
   if (!inputScene) {
     return;
   }
@@ -17,7 +11,7 @@ export const parseSceneJSON = (inputScene) => {
   Object.entries(inputScene).forEach(([key, value]) => {
     const originPoint = Object.keys(inputScene).includes('originPoint') ? inputScene.originPoint : {"x": 0 , "y": 0, "z": 0}
     if (key !== 'originPoint') {
-      BABYLON.SceneLoader.ImportMeshAsync('', value.url, null, scene).then((result) => {
+      BABYLON.SceneLoader.ImportMeshAsync('', value.url, null, window.scene).then((result) => {
         result.meshes[0].position.x = value.position.x + originPoint.x
         result.meshes[0].position.y = value.position.y + originPoint.y
         result.meshes[0].position.z = value.position.z + originPoint.z
@@ -72,12 +66,12 @@ const initXrScene = () => {
  
   // Fetched scene file and instantiated and positioned specifieed models.
   // Light.
-  const light = new BABYLON.DirectionalLight('light', new BABYLON.Vector3(-5, -10, 7), scene)
+  const light = new BABYLON.DirectionalLight('light', new BABYLON.Vector3(-5, -10, 7), window.scene)
   light.intensity = 1.0
 
-  const ground = BABYLON.Mesh.CreatePlane('ground', 100, scene)
+  const ground = BABYLON.Mesh.CreatePlane('ground', 100, window.scene)
   ground.rotation.x = Math.PI / 2;
-  ground.material = new BABYLON.StandardMaterial('groundMaterial', scene);
+  ground.material = new BABYLON.StandardMaterial('groundMaterial', window.scene);
   ground.material.diffuseColor = BABYLON.Color3.Purple();
   ground.material.alpha = 0
   surface = ground
@@ -88,11 +82,12 @@ const initXrScene = () => {
 }
 
 const startScene = () => {
+  window.neadvar = "if you see this the script succeeded in changing the variable";
   const canvas = document.getElementById('renderCanvas')
 
   engine = new BABYLON.Engine(canvas, true /* antialias */)
-  scene = new BABYLON.Scene(engine)
-  camera = new BABYLON.FreeCamera('camera', new BABYLON.Vector3(0, 0, 0), scene)
+  window.scene = new BABYLON.Scene(engine)
+  camera = new BABYLON.FreeCamera('camera', new BABYLON.Vector3(0, 0, 0), window.scene)
 
   initXrScene()
 

@@ -1,4 +1,4 @@
-// import SceneEditor from "./sceneEditor/SceneEditor";
+import SceneEditor from "./sceneEditor/SceneEditor";
 import Navigator from "./navigator/Navigator";
 import './css/App.css';
 
