@@ -85,7 +85,6 @@ const initXrScene = () => {
 }
 
 const startScene = () => {
-  window.neadvar = "if you see this the script succeeded in changing the variable";
   const canvas = document.getElementById('renderCanvas')
 
   engine = new BABYLON.Engine(canvas, true /* antialias */)
