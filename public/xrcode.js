@@ -1,9 +1,12 @@
+export let scene;
 /* globals BABYLON XR8 XRExtras */
 
-let scene, surface, engine, camera
+let surface, engine, camera
 
 // Given an input JSON file, instantiate and position all models specified in the file relative to the specified origin.
 const parseSceneJSON = (inputScene) => {
+  console.log("PARSING SCENE!!!");
+  console.log(scene);
   if (!inputScene) {
     return;
   }
@@ -11,7 +14,7 @@ const parseSceneJSON = (inputScene) => {
   Object.entries(inputScene).forEach(([key, value]) => {
     const originPoint = Object.keys(inputScene).includes('originPoint') ? inputScene.originPoint : {"x": 0 , "y": 0, "z": 0}
     if (key !== 'originPoint') {
-      BABYLON.SceneLoader.ImportMeshAsync('', value.url, null, window.scene).then((result) => {
+      BABYLON.SceneLoader.ImportMeshAsync('', value.url, null, scene).then((result) => {
         result.meshes[0].position.x = value.position.x + originPoint.x
         result.meshes[0].position.y = value.position.y + originPoint.y
         result.meshes[0].position.z = value.position.z + originPoint.z
@@ -29,49 +32,49 @@ const initXrScene = () => {
   // keep our data at ndn.<domain>
   
   console.log(`FETCHING: https://cloudflare-dns.com/dns-query?name=ndn.${window.location.hostname}&type=TXT&server=8.8.4.4`);
-  // try {
-  //   fetch(`https://cloudflare-dns.com/dns-query?name=ndn.${window.location.hostname}&type=TXT&server=8.8.4.4`, {
-  //     method: 'GET',
-  //     headers: {
-  //       'Accept': 'application/dns-json',
-  //     }
-  //   })
-  //   .then(response => {
-  //     console.log(`RESPONSE: ${response}`);
-  //     return response.json();
-  //   })
-  //   .then(data => {
-  //     console.log(data)
-  //     console.log(`DATA: ${JSON.stringify(data)}`)
-  //     let sceneurl=''
-  //     if (typeof data.Answer != 'undefined') { 
-  //       data.Answer.forEach(function(txt,k) {
-  //         let split=txt.data.replaceAll('"','').split("=",2)
-  //         let key = split[0]
-  //         let value = split[1]
-  //         console.log(`KEY: ${key}`)
-  //         if (key==="root_scene"){
-  //           sceneurl=value
-  //         }}
-  //       )
-  //     }
-  //     console.log(`SCENE URL: ${sceneurl}`);
-  //     return (!!sceneurl ? fetch(sceneurl) : "");
-  //   })
-  //   .then(scene => (!!scene ? scene.json() : ""))
-  //   .then(sceneJSON => parseSceneJSON(sceneJSON));
-  // } catch (error) {
-  //   console.log('Error: ', error)
-  // }
+  try {
+    fetch(`https://cloudflare-dns.com/dns-query?name=ndn.${window.location.hostname}&type=TXT&server=8.8.4.4`, {
+      method: 'GET',
+      headers: {
+        'Accept': 'application/dns-json',
+      }
+    })
+    .then(response => {
+      console.log(`RESPONSE: ${response}`);
+      return response.json();
+    })
+    .then(data => {
+      console.log(data)
+      console.log(`DATA: ${JSON.stringify(data)}`)
+      let sceneurl=''
+      if (typeof data.Answer != 'undefined') { 
+        data.Answer.forEach(function(txt,k) {
+          let split=txt.data.replaceAll('"','').split("=",2)
+          let key = split[0]
+          let value = split[1]
+          console.log(`KEY: ${key}`)
+          if (key==="root_scene"){
+            sceneurl=value
+          }}
+        )
+      }
+      console.log(`SCENE URL: ${sceneurl}`);
+      return (!!sceneurl ? fetch(sceneurl) : "");
+    })
+    .then(scene => (!!scene ? scene.json() : ""))
+    .then(sceneJSON => parseSceneJSON(sceneJSON));
+  } catch (error) {
+    console.log('Error: ', error)
+  }
  
   // Fetched scene file and instantiated and positioned specifieed models.
   // Light.
-  const light = new BABYLON.DirectionalLight('light', new BABYLON.Vector3(-5, -10, 7), window.scene)
+  const light = new BABYLON.DirectionalLight('light', new BABYLON.Vector3(-5, -10, 7), scene)
   light.intensity = 1.0
 
-  const ground = BABYLON.Mesh.CreatePlane('ground', 100, window.scene)
+  const ground = BABYLON.Mesh.CreatePlane('ground', 100, scene)
   ground.rotation.x = Math.PI / 2;
-  ground.material = new BABYLON.StandardMaterial('groundMaterial', window.scene);
+  ground.material = new BABYLON.StandardMaterial('groundMaterial', scene);
   ground.material.diffuseColor = BABYLON.Color3.Purple();
   ground.material.alpha = 0
   surface = ground
@@ -86,8 +89,8 @@ const startScene = () => {
   const canvas = document.getElementById('renderCanvas')
 
   engine = new BABYLON.Engine(canvas, true /* antialias */)
-  window.scene = new BABYLON.Scene(engine)
-  camera = new BABYLON.FreeCamera('camera', new BABYLON.Vector3(0, 0, 0), window.scene)
+  scene = new BABYLON.Scene(engine)
+  camera = new BABYLON.FreeCamera('camera', new BABYLON.Vector3(0, 0, 0), scene)
 
   initXrScene()
 

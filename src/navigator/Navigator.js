@@ -4,6 +4,8 @@ import NavJSONList from './NavJSONList';
 import NavList from './NavList';
 import axios from 'axios';
 import '../css/Navigator.css';
+import { scene } from '../../public/xrcode.js';
+// import {testFunction} from '../../public/xrcode.js';
 
 const Navigator = (props) => {
     const [sceneURLList, setSceneURLList] = useState([]);
@@ -19,8 +21,8 @@ const Navigator = (props) => {
 
     // Init sceneJSONList w/ get requests from URLS in sceneURLList
     useEffect(() => {
-        console.log(window.headvar);
-        console.log(window.neadvar);
+        console.log("SCENE:");
+        console.log(window);
         fetch(`https://cloudflare-dns.com/dns-query?name=ndn.${window.location.hostname}&type=TXT&server=8.8.4.4`, {
             method: 'GET',
             headers: {
