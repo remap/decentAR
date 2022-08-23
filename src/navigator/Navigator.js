@@ -4,8 +4,6 @@ import NavJSONList from './NavJSONList';
 import NavList from './NavList';
 import axios from 'axios';
 import '../css/Navigator.css';
-import { scene } from '../../public/xrcode.js';
-// import {testFunction} from '../../public/xrcode.js';
 
 const Navigator = (props) => {
     const [sceneURLList, setSceneURLList] = useState([]);

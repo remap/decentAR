@@ -1,7 +1,6 @@
-export let scene;
 /* globals BABYLON XR8 XRExtras */
 
-let surface, engine, camera
+let scene, surface, engine, camera
 
 // Given an input JSON file, instantiate and position all models specified in the file relative to the specified origin.
 const parseSceneJSON = (inputScene) => {
@@ -85,7 +84,6 @@ const initXrScene = () => {
 }
 
 const startScene = () => {
-  window.neadvar = "if you see this the script succeeded in changing the variable";
   const canvas = document.getElementById('renderCanvas')
 
   engine = new BABYLON.Engine(canvas, true /* antialias */)
