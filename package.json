@@ -22,7 +22,10 @@
     "react-dom": "^18.2.0",
     "react-scripts": "^5.0.1",
     "react-uuid": "^1.0.2",
-    "web-vitals": "^2.1.4"
+    "web-vitals": "^2.1.4",
+    "@ndn/cli-common": "https://ndnts-nightly.ndn.today/cli-common.tgz",
+    "@ndn/endpoint": "https://ndnts-nightly.ndn.today/endpoint.tgz",
+    "@ndn/packet": "https://ndnts-nightly.ndn.today/packet.tgz"
   },
   "overrides": {
     "autoprefixer": "10.4.5"

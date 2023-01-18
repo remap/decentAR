@@ -1,6 +1,9 @@
 import SceneEditor from "./sceneEditor/SceneEditor";
 import Navigator from "./navigator/Navigator";
 import Uploader from "./sceneEditor/Uploader";
+import { connectToNetwork } from "@ndn/autoconfig";
+import { Endpoint } from "@ndn/endpoint";
+import { AltUri, Interest, Name } from "@ndn/packet";
 import './css/App.css';
 
 function App() {
