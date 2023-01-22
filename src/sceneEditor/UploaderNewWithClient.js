@@ -6,19 +6,62 @@ import { saveAs } from 'file-saver';
 import { connectToNetwork } from "@ndn/autoconfig";
 import { Endpoint } from "@ndn/endpoint";
 import { WsTransport } from "@ndn/ws-transport";
-import { AltUri, Interest, Name, Data } from "@ndn/packet";
+import { AltUri, Interest, Name, Data, digestSigning } from "@ndn/packet";
 
-const Uploader = () => {
+const UploaderNewWithClient = () => {
   const [selectedFile, setSelectedFile] = useState(null);
   const [subtitle, setSubtitle] = useState("upload a GLTF file!!")
   const handleFileInput = (e) => setSelectedFile(e.target.files[0]);
 
-  const uploadFile = (file) => {
+  // upload a file to the repo
+  const uploadFile = async (file) => {
     console.log("uploadFile fired.");
-    // axios.get("https://bxyhhrw8zg.execute-api.us-west-1.amazonaws.com/default/getPresignedURLUpload")
-    // .then(response => {
-    //   axios.put(response.data.uploadURL, file, {headers: {'Content-Type': 'model/gltf-binary', 'Access-Control-Allow-Origin': '*'}})
-    // })
+
+    const repoPrefix = "/testrepo";
+    const dataPrefix = new Name(`/NDNts-repo-external/${Math.trunc(Math.random() * 1e8)}`);
+
+    const face = await WsTransport.createFace({}, "ws://localhost:9696");
+    enableNfdPrefixReg(face);
+
+    const store = new PyRepoStore({
+      repoPrefix: new Name(repoPrefix),
+    });
+
+    const packets = [];
+    for (let i = 0; i < 256; ++i) {
+      const data = new Data(dataPrefix.append(`${i}`));
+      data.freshnessPeriod = 1;
+      await digestSigning.sign(data);
+      packets.push(data);
+    }
+
+    console.log(`Inserting ${packets.length} packets under ${dataPrefix} to ${repoPrefix}`);
+    try {
+      await store.insert(...packets);
+    } finally {
+      await store.close();
+      face.close();
+    }
+  }
+
+  const getFile = async (fileName) => {
+    console.log("getFile fired.");
+
+    const repoPrefix = "/testrepo";
+
+    const face = await WsTransport.createFace({}, "ws://localhost:9696");
+    enableNfdPrefixReg(face);
+
+    const store = new PyRepoStore({
+      repoPrefix: new Name(repoPrefix),
+    });
+
+    try {
+      await store.get(fileName);
+    } finally {
+      await store.close();
+      face.close();
+    }
   }
 
   const produce = async (file) => {
@@ -96,4 +139,4 @@ const Uploader = () => {
   );
 }
 
-export default Uploader;
+export default UploaderNewWithClient;
