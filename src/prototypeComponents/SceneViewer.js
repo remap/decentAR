@@ -11,7 +11,7 @@ const placeholderSceneFile = {
 
 // Displays a representation of the scene represented by sceneJSON.
 // Current temp implementation just displays the JSON text itself.
-const SceneViewerPrototype = (props) => {
+const SceneViewer = (props) => {
   const getObjectFile = (objectFileName) => {
     console.log("getObjectFile fired.");
   }
@@ -33,4 +33,4 @@ const SceneViewerPrototype = (props) => {
 
 // <a data-8code="jywmx"></a>
 
-export default SceneViewerPrototype;
+export default SceneViewer;

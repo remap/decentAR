@@ -8,18 +8,20 @@ import { Endpoint } from "@ndn/endpoint";
 import { WsTransport } from "@ndn/ws-transport";
 import { AltUri, Interest, Name, Data } from "@ndn/packet";
 
-const UploaderPrototype = () => {
+const FileUploader = () => {
   const [selectedFile, setSelectedFile] = useState(null);
+  const title = "DECENT AR FILE UPLOADER";
   const [subtitle, setSubtitle] = useState("upload a GLTF file!!")
   const handleFileInput = (e) => setSelectedFile(e.target.files[0]);
 
   const uploadFile = (file) => {
-    console.log("uploadFile fired.");
+    console.log("uploadFile fired. Uploaded file:");
+    console.log(file);
   }
 
   return (
     <div className='uploader-container'>
-      <div className='uploader-title'>DECENT AR</div>
+      <div className='uploader-title'>{title}</div>
       <div className='uploader-subtitle'>{subtitle}</div>
       <div className='uploader'>
         <input type="file" onChange={handleFileInput}/>
@@ -29,4 +31,4 @@ const UploaderPrototype = () => {
   );
 }
 
-export default UploaderPrototype;
+export default FileUploader;

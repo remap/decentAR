@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import uuid from 'react-uuid';
 import ObjectHierarchy from './ObjectHierarchy';
-import SceneViewer from './SceneViewer';
+import SceneViewer from './SceneViewerOld';
 import ScenePicker from './ScenePicker';
 import '../css/SceneEditor.css';
 import { bucketURL } from '../constants/constants';
