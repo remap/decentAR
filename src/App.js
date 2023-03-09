@@ -2,20 +2,22 @@ import SceneEditor from "./sceneEditor/SceneUploader";
 import Navigator from "./navigator/Navigator";
 import FileUploader from "./sceneEditor/FileUploader";
 import FileUploaderPage from "./pages/FileUploaderPage";
+import RepoRetriever from "./prototypeComponents/RepoRetriever";
 import SceneUploaderPage from "./pages/SceneUploaderPage";
 import ViewerPage from "./pages/ViewerPage";
 import Layout from "./pages/Layout";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import NoPage from "./pages/NoPage";
 import Home from "./pages/Home";
+import UploaderNewWithClient from "./prototypeComponents/UploaderNewWithClient";
 import './css/App.css';
 
 function App() {
   return (
     <div className="App">  
-      {/* <FileUploader/> */}
+      {/* <RepoRetriever/> */}
       {/* <canvas style={{width: "100%", height: "100%"}}id="renderCanvas"></canvas> */}
-      <BrowserRouter>
+      {/* <BrowserRouter>
       <Routes>
         <Route path="/" element={<Layout />}>
           <Route index element={<Home />} />
@@ -25,7 +27,7 @@ function App() {
           <Route path="*" element={<NoPage />} />
         </Route>
       </Routes>
-    </BrowserRouter>
+    </BrowserRouter> */}
     </div>
   );
 }

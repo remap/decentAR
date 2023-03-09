@@ -7,6 +7,8 @@ import { connectToNetwork } from "@ndn/autoconfig";
 import { Endpoint } from "@ndn/endpoint";
 import { WsTransport } from "@ndn/ws-transport";
 import { AltUri, Interest, Name, Data, digestSigning } from "@ndn/packet";
+import { enableNfdPrefixReg } from '@ndn/nfdmgmt';
+import { PyRepoStore } from '@ndn/repo-external';
 
 const UploaderNewWithClient = () => {
   const [selectedFile, setSelectedFile] = useState(null);
@@ -20,7 +22,7 @@ const UploaderNewWithClient = () => {
     const repoPrefix = "/testrepo";
     const dataPrefix = new Name(`/NDNts-repo-external/${Math.trunc(Math.random() * 1e8)}`);
 
-    const face = await WsTransport.createFace({}, "ws://localhost:9696");
+    const face = await WsTransport.createFace({}, "wss://localhost:9696");
     enableNfdPrefixReg(face);
 
     const store = new PyRepoStore({
@@ -49,7 +51,7 @@ const UploaderNewWithClient = () => {
 
     const repoPrefix = "/testrepo";
 
-    const face = await WsTransport.createFace({}, "ws://localhost:9696");
+    const face = await WsTransport.createFace({}, "wss://localhost:9696");
     enableNfdPrefixReg(face);
 
     const store = new PyRepoStore({
