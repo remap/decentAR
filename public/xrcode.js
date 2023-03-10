@@ -1,8 +1,3 @@
-import { connectToNetwork } from "@ndn/autoconfig"
-import { Endpoint } from "@ndn/endpoint"
-import { WsTransport } from "@ndn/ws-transport"
-import { AltUri, Interest, Name, Data, digestSigning, Component } from "@ndn/packet"
-import { fetch } from "@ndn/segmented-object"
 let scene, surface, engine, camera
 /* globals BABYLON XR8 XRExtras */
 

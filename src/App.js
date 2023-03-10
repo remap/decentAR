@@ -15,7 +15,7 @@ import './css/App.css';
 function App() {
   return (
     <div className="App">  
-      {/* <RepoRetriever/> */}
+      <RepoRetriever/>
       {/* <canvas style={{width: "100%", height: "100%"}}id="renderCanvas"></canvas> */}
       {/* <BrowserRouter>
       <Routes>
