@@ -1,12 +1,33 @@
-import SceneEditor from "./sceneEditor/SceneEditor";
+import SceneEditor from "./sceneEditor/SceneUploader";
 import Navigator from "./navigator/Navigator";
+import FileUploader from "./sceneEditor/FileUploader";
+import FileUploaderPage from "./pages/FileUploaderPage";
+import RepoRetriever from "./prototypeComponents/RepoRetriever";
+import SceneUploaderPage from "./pages/SceneUploaderPage";
+import ViewerPage from "./pages/ViewerPage";
+import Layout from "./pages/Layout";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import NoPage from "./pages/NoPage";
+import Home from "./pages/Home";
+import UploaderNewWithClient from "./prototypeComponents/UploaderNewWithClient";
 import './css/App.css';
 
 function App() {
   return (
     <div className="App">  
-      <Navigator/>
-      <canvas style={{width: "100%", height: "100%"}}id="renderCanvas"></canvas>
+      <RepoRetriever/>
+      {/* <canvas style={{width: "100%", height: "100%"}}id="renderCanvas"></canvas> */}
+      {/* <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<Layout />}>
+          <Route index element={<Home />} />
+          <Route path="fileuploaderpage" element={<FileUploaderPage />} />
+          <Route path="sceneuploaderpage" element={<SceneUploaderPage />} />
+          <Route path="viewerpage" element={<ViewerPage />} />
+          <Route path="*" element={<NoPage />} />
+        </Route>
+      </Routes>
+    </BrowserRouter> */}
     </div>
   );
 }

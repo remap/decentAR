@@ -7,7 +7,7 @@ import { placeholderItemValue } from '../constants/constants';
 import ConfirmationModal from './ConfirmationModal';
 
 const ObjectEditor = (props) => {
-    const [tentativeItemValue, setTentativeItemValue] = useState(placeholderItemValue);
+    const [tentativeItemValue, setTentativeItemValue] = useState(JSON.parse(JSON.stringify(placeholderItemValue)));
 
     useEffect(() => {
         setTentativeItemValue(props.itemValue);

@@ -24,7 +24,7 @@ const ObjectHierarchy = (props) => {
                     </ListGroup.Item>;
                 })}
             </ListGroup>
-            <Button onClick={(e) => props.addNewObject(e, placeholderItemValue)}>
+            <Button onClick={(e) => props.addNewObject(e, JSON.parse(JSON.stringify(placeholderItemValue)))}>
                 Add object
             </Button>
       </Card>

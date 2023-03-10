@@ -2,27 +2,12 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import uuid from 'react-uuid';
 import ObjectHierarchy from './ObjectHierarchy';
-import SceneViewer from './SceneViewer';
+import SceneViewer from './SceneViewerOld';
 import ScenePicker from './ScenePicker';
 import '../css/SceneEditor.css';
-import { bucketURL } from '../constants/constants';
-
-const placeholderURL = bucketURL + "decentar_scenes_scene.json";
 
 const SceneEditor = () => {
     const [sceneJSON, setSceneJSON] = useState({});
-    const [sceneURL, setSceneURL] = useState(placeholderURL);
-
-    useEffect(() => {
-        async function fetchData(sceneURL) {
-            const request= await axios.get(sceneURL);
-            setSceneJSON(request.data);
-            return request.data;
-        }
-        if (sceneURL) {
-            fetchData(sceneURL);
-        }
-    }, [sceneURL]);
 
     const addNewObject = (e, objectValue) => {
         let newID = uuid();
@@ -39,7 +24,7 @@ const SceneEditor = () => {
         let newSceneJSON = {...sceneJSON};
         newSceneJSON[index] = objectValue;
         setSceneJSON(newSceneJSON);
-        axios.put(sceneURL, newSceneJSON, {headers: {'Content-Type': 'application/json', 'Access-Control-Allow-Origin': '*'}});
+        // axios.put(sceneURL, newSceneJSON, {headers: {'Content-Type': 'application/json', 'Access-Control-Allow-Origin': '*'}});
         e.preventDefault();
     }
 
@@ -47,14 +32,18 @@ const SceneEditor = () => {
         let newSceneJSON = {...sceneJSON};
         delete newSceneJSON[index];
         setSceneJSON(newSceneJSON);
-        axios.put(sceneURL, newSceneJSON, {headers: {'Content-Type': 'application/json', 'Access-Control-Allow-Origin': '*'}});
+        // axios.put(sceneURL, newSceneJSON, {headers: {'Content-Type': 'application/json', 'Access-Control-Allow-Origin': '*'}});
         e.preventDefault();
     }
 
-    const pickScene = (e, scene) =>  {
+    const onSubmitScene = (e, scene) =>  {
         e.preventDefault();
-        const sceneURL = bucketURL + scene + ".json";
-        setSceneURL(sceneURL);
+        console.log("onSubmitScene fired.");
+        console.log(`SCENE NAME: ${scene}`);
+        console.log("OBJECT:");
+        console.log(sceneJSON);
+        // const sceneURL = bucketURL + scene + ".json";
+        // setSceneURL(sceneURL);
     }
 
     return (
@@ -65,8 +54,8 @@ const SceneEditor = () => {
                                     onDeleteObject={onDeleteObject}
                 />
             <div style={{width:'100%', display: 'flex', flexDirection: 'column', rowGap: '2rem'}}>
-                <ScenePicker pickScene={pickScene}/>
-                <SceneViewer sceneJSON={sceneJSON}/>
+                <ScenePicker onSubmitScene={onSubmitScene}/>
+                <div style={{maxWidth: '50rem'}}>{JSON.stringify(sceneJSON)}</div>
             </div>
         </div>
     );

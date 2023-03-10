@@ -15,7 +15,7 @@ const ScenePicker = (props) => {
 
     return (
         <div className='scene-picker'>
-            <Form onSubmit={(e) => props.pickScene(e, tentativeSceneValue)}>
+            <Form onSubmit={(e) => props.onSubmitScene(e, tentativeSceneValue)}>
                 <Form.Group>
                     <Form.Label>Scene Name</Form.Label>
                     <div style={{display: 'flex', flexDirection: 'row'}}>
@@ -24,8 +24,7 @@ const ScenePicker = (props) => {
                             Submit
                         </Button>
                     </div>
-                </Form.Group>
-                
+                </Form.Group>           
             </Form>
         </div>
     );

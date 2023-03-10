@@ -1,6 +1,5 @@
-/* globals BABYLON XR8 XRExtras */
-
 let scene, surface, engine, camera
+/* globals BABYLON XR8 XRExtras */
 
 // Given an input JSON file, instantiate and position all models specified in the file relative to the specified origin.
 const parseSceneJSON = (inputScene) => {
@@ -109,7 +108,7 @@ const onxrloaded = () => {
 }
 
 // Show loading screen before the full XR library has been loaded.
-const load = () => { XRExtras.Loading.showLoading({onxrloaded}) }
+const load = () => { console.log("ahh")}//XRExtras.Loading.showLoading({onxrloaded}) }
 window.onload = () => {
   if (window.XRExtras) {
     load()
